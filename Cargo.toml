@@ -1,0 +1,12 @@
+[package]
+name = "RustEngine"
+version = "0.1.0"
+description = "A simple Rust project for learning purposes"
+authors = ["bobis33"]
+readme = "README.md"
+homepage = "https://github.com/bobis33/Rust-learner#readme"
+repository = "https://github.com/bobis33/Rust-learner"
+edition = "2024"
+license = "MIT"
+
+[dependencies]
