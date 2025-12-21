@@ -1,3 +1,6 @@
+use rust_engine::SystemInfo;
+
 fn main() {
-    println!("Hello, world!");
+    let sys = SystemInfo::new();
+    sys.print();
 }

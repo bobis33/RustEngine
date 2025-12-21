@@ -15,6 +15,7 @@ include = ["src/**", "Cargo.toml", "README.md", "LICENSE.md", "SECURITY.md"]
 publish = false
 
 [dependencies]
+sysinfo = "0.37.2"
 
 [lints.clippy]
 all = "warn"
