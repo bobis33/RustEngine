@@ -1,11 +1,10 @@
 [package]
-name = "RustEngine"
+name = "rust_engine"
 version = "0.0.1"
 description = "A simple rendering engine written in Rust, for learning purposes."
 edition = "2024"
 authors = ["bobis33"]
 readme = "README.md"
-license = "MIT"
 license-file = "LICENSE.md"
 homepage = "https://github.com/bobis33/RustEngine#readme"
 repository = "https://github.com/bobis33/RustEngine"
@@ -16,3 +15,8 @@ include = ["src/**", "Cargo.toml", "README.md", "LICENSE.md", "SECURITY.md"]
 publish = false
 
 [dependencies]
+
+[lints.clippy]
+all = "warn"
+pedantic = "warn"
+nursery = "warn"
