@@ -169,9 +169,7 @@ fn get_gpus() -> Vec<String> {
         if line_lower.contains("vga") || line_lower.contains("3d") {
             if let Some(pos) = line.find(": ") {
                 let desc = line[pos + 2..].trim();
-                let desc_clean = desc
-                    .trim()
-                    .to_string();
+                let desc_clean = desc.trim().to_string();
                 gpus.push(desc_clean);
             }
         }
@@ -180,16 +178,18 @@ fn get_gpus() -> Vec<String> {
     if gpus.is_empty() { vec!["unknown".into()] } else { gpus }
 }
 
-
 #[cfg(target_os = "windows")]
 fn get_gpus() -> Vec<String> {
     use std::process::Command;
 
-    let output = Command::new("powershell")
+    let output = match Command::new("powershell")
         .arg("-Command")
         .arg("Get-WmiObject Win32_VideoController | Select-Object Name")
         .output()
-        .unwrap_or_default();
+    {
+        Ok(o) => o,
+        Err(_) => return vec!["unknown".into()],
+    };
 
     let stdout = String::from_utf8_lossy(&output.stdout);
     stdout
@@ -204,10 +204,13 @@ fn get_gpus() -> Vec<String> {
 fn get_gpus() -> Vec<String> {
     use std::process::Command;
 
-    let output = Command::new("system_profiler")
+    let output = match Command::new("system_profiler")
         .arg("SPDisplaysDataType")
         .output()
-        .unwrap_or_default();
+    {
+        Ok(o) => o,
+        Err(_) => return vec!["unknown".into()],
+    };
 
     let stdout = String::from_utf8_lossy(&output.stdout);
     stdout
