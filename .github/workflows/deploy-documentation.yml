@@ -1,0 +1,40 @@
+name: 'CD - Deploy documentation'
+run-name: 'Deploy documentation - "${{ github.ref_name }}"'
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-docs:
+    name: 'Build documentation'
+    if: github.actor != 'dependabot[bot]'
+    timeout-minutes: 15
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v6
+
+      - name: 'Cache cargo'
+        uses: actions/cache@v5.0.4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: build-ubuntu-24.04-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: 'Build documentation'
+        run: cargo doc --no-deps
+
+      - name: 'Upload documentation to GitHub Pages'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: target/doc
+
+      - name: 'Deploy to GitHub Pages'
+        uses: actions/deploy-pages@v5

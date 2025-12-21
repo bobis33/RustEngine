@@ -1,18 +1,63 @@
-[package]
-name = "RustEngine"
-version = "0.0.1"
-description = "A simple rendering engine written in Rust, for learning purposes."
-edition = "2024"
-authors = ["bobis33"]
-readme = "README.md"
-license = "MIT"
-license-file = "LICENSE.md"
-homepage = "https://github.com/bobis33/RustEngine#readme"
-repository = "https://github.com/bobis33/RustEngine"
-documentation = ""
-keywords = ["rendering", "engine", "graphics", "rust"]
-exclude = [".gitignore", ".editorconfig", "target/*", "tests/*", ".github/*"]
-include = ["src/**", "Cargo.toml", "README.md", "LICENSE.md", "SECURITY.md"]
-publish = false
+[workspace]
+members = [
+    "crates/*",
+    "examples"
+]
+resolver = "3"
 
-[dependencies]
+[workspace.package]
+version = "0.0.1"
+description = "Vulkan based 3D engine"
+edition = "2024"
+authors = []
+readme = "README.md"
+license = ""
+license-file = "LICENSE.md"
+homepage = ""
+repository = "https://github.com/bobis33/vers"
+documentation = ""
+keywords = []
+include = []
+exclude = []
+publish = false
+rust-version = "1.93.0"
+
+[workspace.dependencies]
+
+vers-engine = { path = "crates/vers-engine" }
+
+vers-asset = { path = "crates/vers-asset" }
+vers-audio = { path = "crates/vers-audio" }
+vers-core = { path = "crates/vers-core" }
+vers-platform = { path = "crates/vers-platform" }
+vers-renderer = { path = "crates/vers-renderer" }
+vers-tools = { path = "crates/vers-tools" }
+
+ash = "0.38.0"
+ash-window = "0.13.0"
+gpu-allocator = "0.28.0"
+raw-window-handle = "0.6.2"
+sysinfo = "0.38.4"
+thiserror = "2.0.18"
+winit = "0.30.13"
+log = "0.4.29"
+tracing = "0.1.44"
+tracing-subscriber = "0.3.23"
+bytemuck = "1.25.0"
+shaderc = "0.10.1"
+anyhow = "1.0.102"
+
+[workspace.lints.clippy]
+all = "warn"
+pedantic = "warn"
+nursery = "warn"
+
+[workspace.lints.rust]
+missing_docs = "warn"
+unsafe_code = "warn"
+unused_crate_dependencies = "warn"
+unused_extern_crates = "warn"
+unused_import_braces = "warn"
+unused_lifetimes = "warn"
+unused_macro_rules = "warn"
+unused_qualifications = "warn"

@@ -21,7 +21,7 @@ Branches and Pull Requests must follow this naming convention:
 ```
 <Type>/<Scope>/<Description>>
 ```
-- **Type** → `Feature` | `Fix` | `Refactor` | `Docs` | `Test` | `CI`
+- **Type** → `feature` | `fix` | `refactor` | `docs` | `test` | `ci`
 - **Scope** → `ModuleName` | `ComponentName` | `Global`
 - **Description** → Short, hyphen-separated summary of the change (e.g., `add-login-functionality`)
 
@@ -49,7 +49,7 @@ This ensures consistency across branches and PRs, making it easy to identify the
 - Extension : `.md`
 
 ### Yaml
-- Extention : `.yml`
+- Extension : `.yml`
 
 ### Toml
 - Extension : `.toml`

@@ -1,5 +1,5 @@
-name: 'CI - RustEngine'
-run-name: 'RustEngine - "${{ github.ref_name }}"'
+name: 'CI - vers'
+run-name: 'vers - "${{ github.ref_name }}"'
 permissions:
   contents: read
 on:
@@ -25,19 +25,22 @@ jobs:
 
           - os: ubuntu-24.04
             shell: bash
+            deps: sudo apt-get install libvulkan-dev
 
-          - os: macos-15
-            shell: bash
+          ##  - os: macos-15
+          ##    shell: bash
+          ##    deps: ./scripts/unix/macos/install-vulkansdk.sh
 
           - os: windows-2025
             shell: powershell
+            deps:  .\scripts\windows\install-vulkansdk.ps1
 
     runs-on: ${{ matrix.os }}
     defaults:
       run:
         shell: ${{ matrix.shell }}
     steps:
-      - name: Checkout repository
+      - name: 'Checkout repository'
         uses: actions/checkout@v6.0.1
         with:
           ref: ${{ github.ref }}
@@ -45,11 +48,22 @@ jobs:
           fetch-depth: 1
           submodules: recursive
 
-      - name: Cache cargo
-        uses: Swatinem/rust-cache@v2.8.2
+      - name: 'Cache cargo'
+        uses: actions/cache@v5.0.4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: build-${{ matrix.os }}-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Build
-        run: cargo build
+      - name: 'Install VulkanSDK'
+        run: ${{ matrix.deps }}
 
-      - name: Run tests
+      - name: 'Build'
+        run: cargo check
+
+      - name: 'Run tests'
         run: cargo test

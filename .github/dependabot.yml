@@ -2,7 +2,7 @@ version: 2
 updates:
 
   - package-ecosystem: "github-actions"
-    directory: ".github/workflows"
+    directory: "/"
     schedule:
       interval: "daily"
       time: "05:00"
@@ -11,14 +11,12 @@ updates:
     open-pull-requests-limit: 10
     commit-message:
       prefix: "github-actions"
-      include: scope
-    groups:
-      github-actions:
-        patterns:
-          - "*"
 
   - package-ecosystem: "cargo"
-    directory: "/"
+    directories:
+      - "/"
+      - "/crates/*"
+      - "/examples/*"
     schedule:
       interval: "daily"
       time: "05:00"
