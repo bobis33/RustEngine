@@ -6,11 +6,10 @@
 //! use rust_engine::SystemInfo;
 //!
 //! let info = SystemInfo::new();
-//! println!("{}", info.os);
+//! println!("{}", info.os_arch);
 //! ```
 
-mod error;
-mod system;
+mod system_info;
 
-pub use error::SystemError;
-pub use system::SystemInfo;
+pub use system_info::SystemInfo;
+pub use system_info::error::SystemError;

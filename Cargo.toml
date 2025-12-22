@@ -15,7 +15,12 @@ include = ["src/**", "Cargo.toml", "README.md", "LICENSE.md", "SECURITY.md"]
 publish = false
 
 [dependencies]
+ash = "0.38.0"
+ash-window = "0.13.0"
+glam = "0.30.9"
+raw-window-handle = "0.6.2"
 sysinfo = "0.37.2"
+winit = "0.30.12"
 
 [lints.clippy]
 all = "warn"
