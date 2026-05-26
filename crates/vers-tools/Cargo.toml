@@ -17,7 +17,7 @@ rust-version.workspace = true
 
 [dependencies]
 sysinfo.workspace = true
-log = "0.4.29"
+log = "0.4.30"
 
 [dev-dependencies]
 
